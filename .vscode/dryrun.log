@@ -1,0 +1,8 @@
+make main --dry-run --keep-going --print-directory
+make: Entering directory '/home/osm/Documents/RAY-TRACING-ONE-WEEKEND/osm/SimpleRayTracer'
+g++ -Wall -g  -Iinclude  -c src/main.cc
+echo Compiled source.
+g++ -Wall -g  -Iinclude  -o build/main main.o
+echo Made objects.
+make: Leaving directory '/home/osm/Documents/RAY-TRACING-ONE-WEEKEND/osm/SimpleRayTracer'
+ 

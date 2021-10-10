@@ -1,0 +1,10 @@
+{
+    "makefile.extensionOutputFolder": "./.vscode",
+    "makefile.launchConfigurations": [
+        {
+            "cwd": "/home/osm/Documents/RAY-TRACING-ONE-WEEKEND/osm/SimpleRayTracer/build",
+            "binaryPath": "/home/osm/Documents/RAY-TRACING-ONE-WEEKEND/osm/SimpleRayTracer/build/main",
+            "binaryArgs": []
+        }
+    ]
+}
