@@ -1,12 +1,13 @@
-#include <rtconst.h>
+#include <camera.h>
 #include <color.h>
 #include <hittable_list.h>
+#include <rtconst.h>
 #include <sphere.h>
 
 #include <iostream>
 
 #define RED_RGB color(1, 0, 0)
-#define GREEN_RGB color(1,1,1)
+#define GREEN_RGB color(1, 1, 1)
 
 // @brief Sphere eq: t²b⋅b+ 2tb(A−C)+ (A−C)⋅(A−C)−r²=0 , t als unknown,
 // b : direction,
@@ -39,10 +40,10 @@ color ray_color(const ray &r, const hittable &world) {
 
 int main() {
   // Image
-
   const auto aspect_ratio = 16.0 / 9.0;
   const int image_width = 400;
   const int image_height = static_cast<int>(image_width / aspect_ratio);
+  const int samples_per_pixel = 20;
 
   // Camera
   auto viewport_height = 2.0;
@@ -50,7 +51,9 @@ int main() {
   auto focal_length =
       1.0; // Simply how is far the plane from the camera of the viewport
 
-  //World
+  camera cam;
+
+  // World
   hittable_list world;
   world.add(std::make_shared<sphere>(point3(0, 0, -1), 0.5));
   world.add(std::make_shared<sphere>(point3(0, -100.5, -1), 100));
@@ -69,11 +72,14 @@ int main() {
               << std::flush; // For the chosen PPM This is simply always the
     // same method of "rendering" an image
     for (int i = 0; i < image_width; ++i) {
-      auto u = double(i) / (image_width - 1);
-      auto v = double(j) / (image_height - 1);
-      ray r(origin, lower_left_corner + u * horizental + v * vertical - origin);
-      color pixel_color = ray_color(r, world);
-      write_color(std::cout, pixel_color);
+      color pixel_color(0, 0, 0);
+      for (int s = 0; s < samples_per_pixel; s++) { // Anti-aliasing.
+        auto u = (i + random_double()) / (image_width - 1);
+        auto v = (j + random_double()) / (image_height - 1);
+        ray r = cam.get_ray(u, v);
+        pixel_color += ray_color(r, world);
+      }
+      write_color(std::cout, pixel_color, samples_per_pixel);
     }
   }
   std::cerr << "\nDone.\n";

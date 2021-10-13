@@ -28,6 +28,15 @@ inline double random_double(double min, double max) {
   return min + (max - min) * random_double();
 }
 
+// @brief Clamp/ Put x in [min,max] interval if needed
+inline double clamp(double x, double min, double max) {
+  if (x < min)
+    return min;
+  if (x > max)
+    return max;
+  return x;
+}
+
 // Common Headers
 #include "ray.h"
 #include "vec3.h"
