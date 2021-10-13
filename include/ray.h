@@ -3,7 +3,8 @@
 
 #include "vec3.h"
 
-// @brief A Ray class to portray a linear interpolation of a ray line from source 'orig' in direction 'dir'.
+// @brief A Ray class to portray a linear interpolation of a ray line from
+// source 'orig' in direction 'dir'.
 class ray {
  public:
   ray() {}

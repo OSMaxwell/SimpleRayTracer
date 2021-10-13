@@ -2,7 +2,7 @@ CC = g++
 IDIR = include 
 SRC_DIR = src
 BUILD_DIR = build
-CFLAGS = -Wall -g  -I$(IDIR)
+CFLAGS = -Wall -g  -I$(IDIR) -std=c++11
 #MAKEFLAGS =+ --silent
 
 main: main.o
